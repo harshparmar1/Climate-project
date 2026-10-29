@@ -79,3 +79,11 @@ export const postSendSms = async ({ phone, body }) => {
     const payload = { phone, body };
     return await postSafe('/send-sms', payload);
 };
+
+// POST /api/chat
+// payload: { message: string, history?: [{role, content}], context?: object }
+export const postApiChat = async ({ message, history = [], context = null }) => {
+    const payload = { message, history, context };
+    return await postSafe('/api/chat', payload);
+};
+

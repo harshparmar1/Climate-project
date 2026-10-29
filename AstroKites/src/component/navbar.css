@@ -1,48 +1,43 @@
-/* Navbar.css - Pure CSS for Astrokites Navbar */
+/* Navbar.css - NASA Mission Control Theme */
 
-/* Root navbar styles */
 .navbar {
-  background: linear-gradient(to right, #eff6ff, #eef2ff, #f3e8ff);
-  border-bottom: 1px solid rgba(59, 130, 246, 0.5);
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 1000;
   width: 100%;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px); /* Note: Limited browser support; fallback to no blur if needed */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
 }
 
-/* Container for max-width and padding */
+.navbar::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), var(--indigo), transparent);
+  opacity: 0.7;
+}
+
 .navbarContainer {
-  max-width: 80rem; /* Equivalent to max-w-7xl */
+  max-width: 85rem;
   margin: 0 auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
-@media (min-width: 640px) {
-  .navbarContainer {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .navbarContainer {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-}
-
-/* Inner flex container for navbar content */
 .navbarInner {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 4rem; /* h-16 */
+  height: 4.5rem;
 }
 
-/* Logo section */
 .logoSection {
   display: flex;
   align-items: center;
@@ -50,47 +45,48 @@
 
 .logoWrapper {
   display: flex;
-  flex-shrink: 0;
   align-items: center;
-  gap: 0.5rem; /* space-x-2 */
+  gap: 0.75rem;
   cursor: pointer;
-  transition: opacity 0.2s ease;
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
 .logoWrapper:hover {
-  opacity: 0.9;
+  background: rgba(34, 211, 238, 0.08);
 }
 
 .logoIcon {
   height: 2.5rem;
   width: 2.5rem;
   transition: transform 0.3s ease, filter 0.3s ease;
-  filter: drop-shadow(0 2px 4px rgba(30, 58, 138, 0.3));
+  filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.5));
 }
 
 .logoWrapper:hover .logoIcon {
-  transform: scale(1.05);
-  filter: drop-shadow(0 4px 8px rgba(59, 130, 246, 0.4));
+  transform: scale(1.08) rotate(3deg);
+  filter: drop-shadow(0 0 15px rgba(34, 211, 238, 0.8));
 }
 
 .logoText {
-  font-size: 1.5rem; /* text-2xl */
-  font-weight: 800;
-  background: linear-gradient(135deg, #1e40af, #3b82f6, #2563eb);
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: linear-gradient(135deg, #ffffff 0%, var(--cyan-bright) 60%, var(--indigo-bright) 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: transparent;
-  letter-spacing: -0.02em;
-  text-shadow: 0 2px 4px rgba(30, 64, 175, 0.2);
+  text-shadow: 0 0 20px var(--cyan-glow);
 }
 
-/* Desktop navigation (hidden on mobile) */
+/* Desktop Navigation */
 .desktopNav {
   display: none;
-  margin-left: 2.5rem; /* md:ml-10 */
+  margin-left: 2.5rem;
   align-items: center;
-  gap: 0.25rem; /* md:space-x-1 */
+  gap: 0.5rem;
 }
 
 @media (min-width: 768px) {
@@ -99,37 +95,61 @@
   }
 }
 
-/* Navigation buttons (desktop and mobile variants) */
-.navButton,
-.mobileNavButton {
-  color: #374151; /* text-foreground (gray-700) */
-  background: none;
-  border: none;
+.navButton {
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid transparent;
   display: flex;
   align-items: center;
-  gap: 0.25rem; /* space-x-1 or space-x-2 */
-  padding: 0.5rem 0.75rem; /* px-3 py-2 or px-4 py-2 */
-  border-radius: 0.375rem; /* rounded-md */
-  font-size: 0.875rem; /* text-sm */
-  font-weight: 500; /* font-medium */
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease; /* transition-colors */
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.navButton:hover,
-.mobileNavButton:hover {
-  background-color: rgba(59, 130, 246, 0.1); /* hover:bg-blue-100/50 */
-  color: #1d4ed8; /* hover:text-blue-700 */
+.navButton:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
 }
 
-/* Active state styling to match hover state */
-.navButton.active,
-.mobileNavButton.active {
-  background-color: rgba(59, 130, 246, 0.1); /* Same as hover bg-blue-100/50 */
-  color: #1d4ed8; /* Same as hover text-blue-700 */
+.navButton.active {
+  color: var(--cyan-bright);
+  background: rgba(34, 211, 238, 0.12);
+  border: 1px solid var(--border-bright);
+  box-shadow: 0 0 15px var(--cyan-glow);
 }
 
-/* Search wrapper (hidden on mobile) */
+.navButton.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 20%;
+  width: 60%;
+  height: 2px;
+  background: var(--cyan);
+  border-radius: 2px;
+  box-shadow: 0 0 8px var(--cyan);
+}
+
+.navButton .icon {
+  width: 1.1rem;
+  height: 1.1rem;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.navButton:hover .icon {
+  color: var(--cyan);
+  transform: scale(1.1);
+}
+
+/* Search Wrapper */
 .searchWrapper {
   display: none;
   position: relative;
@@ -143,115 +163,57 @@
 
 .searchIcon {
   position: absolute;
-  left: 0.75rem;
+  left: 0.85rem;
   top: 50%;
   transform: translateY(-50%);
   height: 1rem;
   width: 1rem;
-  color: #9ca3af; /* text-muted-foreground (gray-400) */
+  color: var(--text-muted);
   pointer-events: none;
+  transition: color 0.2s ease;
 }
 
 .searchInput,
 .mobileSearchInput {
-  width: 100%;
-  padding: 0.5rem 1rem 0.5rem 2.5rem; /* pl-10 pr-4 py-2 */
-  background-color: rgba(255, 255, 255, 0.8); /* bg-white/80 */
-  border: 1px solid #bfdbfe; /* border-blue-200 */
-  border-radius: 9999px; /* rounded-full */
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* shadow-sm */
-  font-size: 0.875rem; /* text-sm */
+  width: 13rem;
+  padding: 0.5rem 1rem 0.5rem 2.5rem;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  color: var(--text-primary);
+  font-family: var(--font-primary);
+  font-size: 0.875rem;
   outline: none;
-  transition: all 0.2s ease;
-}
-
-.searchInput {
-  width: 12rem; /* w-48 */
+  transition: all 0.25s ease;
 }
 
 @media (min-width: 1024px) {
   .searchInput {
-    width: 16rem; /* lg:w-64 */
+    width: 16rem;
   }
 }
 
 .searchInput:focus,
 .mobileSearchInput:focus {
-  /* ring: 2px solid #3b82f6; focus:ring-2 focus:ring-blue-500 */
-  border-color: transparent;
-  background-color: rgba(255, 255, 255, 1);
+  background: rgba(15, 23, 42, 0.95);
+  border-color: var(--cyan);
+  box-shadow: 0 0 15px var(--cyan-glow);
 }
 
-/* User buttons section (hidden on mobile) */
-.userButtons {
-  display: none;
-  align-items: center;
-  gap: 0.5rem; /* space-x-2 */
+.searchInput:focus + .searchIcon {
+  color: var(--cyan);
 }
 
-@media (min-width: 768px) {
-  .userButtons {
-    display: flex;
-  }
-}
-
-/* Sign In button (outline style) */
-.signInButton,
-.mobileSignInButton {
-  border: 1px solid #bfdbfe; /* border-blue-200 */
-  background: none;
-  color: #374151; /* text-foreground */
-  display: flex;
-  align-items: center;
-  gap: 0.25rem; /* space-x-1 */
-  padding: 0.5rem 1rem; /* px-4 py-2 */
-  border-radius: 0.375rem; /* rounded-md */
-  font-size: 0.875rem; /* text-sm */
-  font-weight: 500; /* font-medium */
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.signInButton:hover,
-.mobileSignInButton:hover {
-  background-color: #eff6ff; /* hover:bg-blue-50 */
-}
-
-/* Sign Up button (gradient primary style) */
-.signUpButton,
-.mobileSignUpButton {
-  background: linear-gradient(to right, #2563eb, #9333ea); /* from-blue-600 to-purple-600 */
-  color: white;
-  border: none;
-  display: flex;
-  align-items: center;
-  gap: 0.25rem; /* space-x-1 */
-  padding: 0.5rem 1rem; /* px-4 py-2 */
-  border-radius: 9999px; /* rounded-full */
-  font-size: 0.875rem; /* text-sm */
-  font-weight: 500; /* font-medium */
-  box-shadow: 0 4px 6px rgba(59, 130, 246, 0.3); /* shadow-lg */
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.signUpButton:hover,
-.mobileSignUpButton:hover {
-  background: linear-gradient(to right, #1d4ed8, #7c3aed); /* hover:from-blue-700 hover:to-purple-700 */
-  transform: translateY(-1px);
-  box-shadow: 0 6px 8px rgba(59, 130, 246, 0.4);
-}
-
-/* Mobile menu button (hamburger) */
+/* Mobile Hamburger Button */
 .mobileMenuButton {
   display: block;
-  padding: 0;
-  background: none;
-  border: none;
-  color: #2563eb; /* text-blue-600 */
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--cyan);
   cursor: pointer;
   transition: all 0.2s ease;
-  border-radius: 0.375rem; /* rounded-md */
 }
 
 @media (min-width: 768px) {
@@ -261,12 +223,20 @@
 }
 
 .mobileMenuButton:hover {
-  background-color: rgba(59, 130, 246, 0.1); /* hover:bg-blue-100/50 */
+  background: rgba(34, 211, 238, 0.15);
+  border-color: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan-glow);
 }
 
-/* Mobile menu wrapper */
+.mobileMenuButton svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Mobile Dropdown Wrapper */
 .mobileMenuWrapper {
   display: block;
+  animation: fadeIn 0.25s ease-out;
 }
 
 @media (min-width: 768px) {
@@ -275,65 +245,66 @@
   }
 }
 
-/* Mobile menu content */
 .mobileMenuContent {
-  padding: 0.5rem 0.5rem 0.75rem 0.5rem; /* px-2 pt-2 pb-3 */
-  gap: 0.5rem; /* space-y-2 */
-  background-color: rgba(255, 255, 255, 0.8); /* bg-white/80 */
-  backdrop-filter: blur(10px);
-  border-radius: 0.75rem; /* rounded-xl */
-  margin-top: 0.5rem; /* mt-2 */
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* shadow-lg */
-  border: 1px solid rgba(191, 219, 254, 0.5); /* border-blue-200/50 */
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 12px;
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--border-bright);
 }
 
-@media (min-width: 640px) {
-  .mobileMenuContent {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem; /* sm:px-3 */
-  }
+.mobileNavButton {
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
 }
 
-/* Mobile search wrapper */
+.mobileNavButton:hover,
+.mobileNavButton.active {
+  color: var(--cyan-bright);
+  background: rgba(34, 211, 238, 0.1);
+  border-color: var(--border-bright);
+}
+
 .mobileSearchWrapper {
-  padding: 0.75rem 1rem; /* px-4 py-3 */
   position: relative;
+  margin-top: 0.5rem;
 }
 
-/* Mobile search input (same as desktop but full width) */
 .mobileSearchInput {
   width: 100%;
 }
 
-/* Mobile auth buttons container */
-.mobileAuthButtons {
-  padding: 0.75rem 1rem; /* px-4 py-3 */
-  gap: 0.5rem; /* space-y-2 */
-}
-
-/* Mobile nav and auth buttons (full width) */
-.mobileNavButton,
-.mobileSignInButton,
-.mobileSignUpButton {
-  width: 100%;
-  justify-content: flex-start; /* For nav buttons */
-}
-
-.mobileSignInButton,
-.mobileSignUpButton {
-  justify-content: center; /* For auth buttons */
-}
-
-/* Icon sizes (consistent across) */
-.icon {
-  height: 1rem;
-  width: 1rem;
-  flex-shrink: 0;
-}
-
-/* General flex utilities for sections */
 .flex-center {
   display: flex;
   align-items: center;
-  gap: 1rem; /* space-x-4 for search/user section */
+  gap: 1rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

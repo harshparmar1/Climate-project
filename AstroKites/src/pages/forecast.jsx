@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./forecast.css";
 import { postPowerData, postStateSevenDayForecast, postSendSms } from "../api/axios";
+import ForecastEarthCanvas from "../three/ForecastEarthCanvas";
+import ScrollReveal from "../component/ScrollReveal";
 
 // --- CONFIG ---
 const PARAMETERS = ["T2M", "PRECTOT", "WS2M"]; // Temperature (°C), Precipitation (mm/day), Wind speed (m/s)
@@ -1273,11 +1275,13 @@ const ForecastSimplified = () => {
   }, [forecastData, selectedCity, selectedState]);
 
   return (
-    <div className="fs-container">
-      <header className="fs-header">
-        <h2>Weather Forecast</h2>
-        <p className="muted">Detailed weather forecast with insights — Temperature, Precipitation, Wind</p>
-      </header>
+    <>
+      <ForecastEarthCanvas />
+      <div className="fs-container">
+        <header className="fs-header">
+          <h2>Weather Forecast</h2>
+          <p className="muted">Detailed weather forecast with insights — Temperature, Precipitation, Wind</p>
+        </header>
 
       <section className="fs-controls">
         <div className="location-selectors">
@@ -1902,6 +1906,7 @@ const ForecastSimplified = () => {
       </section>
 
     </div>
+    </>
   );
 };
 
